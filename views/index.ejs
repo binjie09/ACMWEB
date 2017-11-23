@@ -1,0 +1,76 @@
+<!DOCTYPE html >
+<html >
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+<title>ACM乌鲁木齐站酒店预约和信息确认</title>
+<link href="css/bootstrap.min.css" title="" rel="stylesheet" />
+
+<link title="orange" href="css/login.css" rel="stylesheet" type="text/css"/>
+
+
+</head>
+
+<body>
+<div class="alert alert-success" role="alert">所有数据来自回执单，如果出现各种信息错误或者无法登陆，请联系开发者 qq:452638569 mail:binjie09@gmail.com</div>
+<div style="height:1px;"></div>
+<div class="login">
+	<header>
+		<h1>ACM酒店预约和信息确认系统</h1>
+	</header>
+	<div class="sr">
+		<form>
+			<div class="name">
+				<label>
+					<i class="sublist-icon glyphicon glyphicon-user"></i>
+				</label>
+				<input type="text" id="username" placeholder="队伍默认用户名是队长手机号码" class="name_inp">
+			</div>
+			<div class="name">
+				<label>
+					<i class="sublist-icon glyphicon glyphicon-pencil"></i>
+				</label>
+				<input id="password" type="text"  placeholder="默认密码也是也是队长手机号码" class="name_inp">
+			</div>
+			<button id="denglu" type="button" class="dl">登录</button>
+		</form>
+	</div>
+</div>
+
+
+
+  <div id="footer" class="container">
+	  <nav class="navbar navbar-default navbar-fixed-bottom">
+		  <div class="navbar-inner navbar-content-center">
+			  <p class="text-muted credit" style="padding: 10px; text-align: center">
+				  Copyright &copy; 2017. All Rights Reserved <a href="http://acm.xju.edu.cn/" target="_blank">新疆大学软件学院</a> admin <a href="mailto:binjie09@outlook.com">陈彬杰</a>
+
+			  </p>
+		  </div>
+	  </nav>
+  </div>
+  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+
+      $("#denglu").button().click(function () {
+
+          $.post("./doLogin",{
+
+              "username" : $("#username").val(),
+              "password" : $("#password").val()
+
+          },function (res) {
+            //  alert("test2");
+              if(res == "1"){
+              //    alert("test3");
+                  window.location.href = "/users";
+              }else{
+                  alert("登陆失败");
+              }
+          });
+      });
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+  <title>标题</title>
+  <!-- Bootstrap -->
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+  <style type="text/css">
+    img{
+      height: 400px;
+      width: 400px;
+    }
+    button{
+      text-align: center;
+      margin:0 auto ;
+    }
+    span{
+      text-align: center;
+    }
+    .row h4{
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+<div class="row">
+  <!--<div class="span4">-->
+    <!--<div class="list-group">-->
+      <!--<a href="#shenfen" class="list-group-item active">-->
+        <!--提交身份信息（一寸照片）-->
+      <!--</a>-->
+      <!--<a href="#" class="list-group-item">酒店自助预定</a>-->
+      <!--<a href="#" class="list-group-item">查看队伍其他信息</a>-->
+      <!--<a href="#" class="list-group-item">修改密码</a>-->
+      <!--<a href="#" class="list-group-item">Vestibulum at eros</a>-->
+    <!--</div>-->
+  <!--</div>-->
+  <div class="span8">
+    <div class="container">
+      <p class="container">
+        <div class="container">
+          <form id="fmSave" action="/saveInfo" method="post" enctype="multipart/form-data" class="form-horizontal"  role="form">
+            <fieldset>
+              <legend id="shenfen">提交身份信息</legend>
+      <p>由于新疆的安保问题，所有参赛队员和前往现场赛的教练都需要提交电子一寸照片（用于制作参赛证）</p>
+
+      <div class="form-group">
+        <label for="dtp_input2" class="col-md-2 control-label">队伍名称</label>
+        <div class="input-group   col-md-5"   >
+          <input name="tName" id="tName" class="form-control" size="16" type="text" value="<%=tName%>" readonly>
+        </div>
+
+      </div>
+      <div class="form-group">
+        <label for="dtp_input3" class="col-md-2 control-label">学校名称</label>
+        <div class="input-group   col-md-5"   >
+          <input name="school" id="school" class="form-control" size="16" type="text" value="<%=school%>" readonly>
+        </div>
+
+      </div>
+      <div class="form-group">
+        <label for="dtp_input3" class="col-md-2 control-label">队员1</label>
+        <div class="input-group   col-md-5"   >
+          <input name="tPerson1" id="tPerson1" class="form-control" size="16" type="text" value="<%=tPerson1%>" readonly>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="dtp_input4" class="col-md-2 control-label">上传<%=tPerson1%>的一寸照片</label>
+        <input type="file" id="inch_photo1"  name="inch_photo1" class="btn btn-inf">
+      </div>
+        <% if(uPhotoPath1!=null){ %>
+      <img src="<%= uPhotoPath1 %>" alt="...">
+        <% } %>
+      <div class="form-group">
+        <label for="dtp_input5" class="col-md-2 control-label">队员2</label>
+        <div class="input-group   col-md-5"   >
+          <input name="tPerson2" id="tPerson2" class="form-control" size="16" type="text" value="<%=tPerson2%>" readonly>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="dtp_input6" class="col-md-2 control-label">上传<%=tPerson2%>的一寸照片</label>
+        <input type="file" id="inch_photo2"  name="inch_photo2" class="btn btn-inf">
+      </div>
+        <% if(uPhotoPath2!=null){ %>
+      <img src="<%= uPhotoPath2 %>" alt="...">
+        <% } %>
+      <div class="form-group">
+        <label for="dtp_input3" class="col-md-2 control-label">队员3</label>
+        <div class="input-group   col-md-5"   >
+          <input name="tPerson3" id="tPerson3" class="form-control" size="16" type="text" value="<%=tPerson3%>" readonly>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="dtp_input4" class="col-md-2 control-label">上传<%=tPerson3%>的一寸照片</label>
+        <input type="file" id="inch_photo3"  name="inch_photo3" class="btn btn-inf">
+      </div>
+        <% if(uPhotoPath3!=null){ %>
+      <img src="<%= uPhotoPath3 %>" alt="...">
+        <% } %>
+      <div class="form-group">
+        <label for="dtp_input3" class="col-md-2 control-label">教练</label>
+        <div class="input-group   col-md-5"   >
+          <input name="coach" id="coach" class="form-control" size="16" type="text" value="<%=coach%>" readonly>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="dtp_input4" class="col-md-2 control-label">上传教练的一寸照片（教练不来现场可不用上传）</label>
+        <input type="file" id="inch_photo4"  name="inch_photo4" class="btn btn-inf">
+          <% if(uPhotoPath4!=null){ %>
+        <img src="<%= uPhotoPath4 %>" alt="...">
+          <% } %>
+      </div>
+
+
+      <button id="btSave" type="submit" class="btn-success">保存</button>
+      </fieldset>
+      </form>
+    </div>
+    <hr>
+    <div class="container">
+      <form id="fmOrder" action="/orderInn" method="post" enctype="multipart/form-data" class="form-horizontal"  role="form">
+        <fieldset>
+          <div class="panel panel-success">
+            <div class="panel-body">
+              边疆宾馆（四星）:<br>
+              商务标间230元每间，共有40间   早餐类型   桌餐  优点:离新疆大学近<br>
+              美玉大酒店:<br>
+              普通标间300元每间（40间），单间价位相同（20间）<br>
+              商务标间400元每间（25间），单间价位相同（7间）<br>
+              豪华套房500元每间（8间）<br>
+              早餐类型:自助餐   优势:会有摆渡车往返接送<br>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="dtp_input3" class="col-md-2 control-label">学校名称</label>
+            <div class="input-group   col-md-5"   >
+              <input name="school" id="school" class="form-control" size="16" type="text" value="<%=school%>" readonly>
+            </div>
+
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-2 control-label">预订宾馆：</label>
+            <div class="col-sm-5">
+              <select id="hotel" name="hotel" class="selectpicker show-tick form-control"  data-live-search="false">
+                <option value="0"></option>
+                <% if (bianjiang > 0 ) { %>
+                <option value="边疆宾馆">边疆宾馆（四星）剩余<%=bianjiang%></option>
+                  <% } %>
+                  <% if (meiyu1 > 0 ) { %>
+                <option value="美玉大酒店 普通标间">美玉大酒店 普通标间 剩余<%=meiyu1%></option>
+                  <% } %>
+                  <% if (meiyu2 > 0 ) { %>
+                <option value="美玉大酒店 普通单间">美玉大酒店 普通单间 剩余<%=meiyu2%></option>
+                  <% } %>
+                  <% if (meiyu3 > 0 ) { %>
+                <option value="美玉大酒店 商务标间">美玉大酒店 商务标间 剩余<%=meiyu3%></option>
+                  <% } %>
+                  <% if (meiyu4 > 0 ) { %>
+                <option value="美玉大酒店 商务单间">美玉大酒店 商务单间 剩余<%=meiyu4%></option>
+                <% } %>
+                  <% if (meiyu5 > 0 ) { %>
+                <option value="美玉大酒店 豪华套房">美玉大酒店 豪华套房 剩余<%=meiyu5%></option>
+                  <% } %>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="dtp_input1" class="col-md-2 control-label">大概的入住时间</label>
+            <div class="input-group date form_datetime col-md-5" data-date="2017-10-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii" data-link-field="dtp_input1">
+              <input id="inTime" name="inTime" class="form-control" size="16" type="text" value="" readonly>
+              <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+              <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-2 control-label">房间数</label>
+            <div class="col-sm-5">
+              <select id="fangjianshu" name="fangjianshu" class="selectpicker show-tick form-control"   data-live-search="false">
+                <option value=0></option>
+                <option value=1>1间</option>
+                <option value=2>2间</option>
+                <option value=3>3间</option>
+              </select>
+            </div>
+          </div>
+          <span>
+    <button id="yuding" type="submit" >预定一下</button>
+            <button id="shanchu" type="button" >重新预定</button>
+    </span>
+          <table class="table table-striped">
+            <tr>
+              <th>已预定酒店</th>
+              <th>预定间数</th>
+              <th>入住时间</th>
+            </tr>
+              <% for(var i = 0; i < jiudian.length; i++){ %>
+            <tr>
+              <td><%=jiudian[i].hotel %></td>
+              <td><%=jiudian[i].number %></td>
+              <td><%=jiudian[i].inTime %></td>
+            </tr>
+              <% } %>
+          </table>
+        </fieldset>
+
+      </form>
+
+    </div>
+    <div class="container">
+      <hr>
+      <legend>队伍其他信息</legend>
+      <div class="form-group">
+        <label for="dtp_input2" class="col-md-2 control-label">票据类型</label>
+        <div class="input-group   col-md-5"   >
+          <input name="type" id="type" class="form-control" size="16" type="text" value="<%=type%>" readonly>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="dtp_input2" class="col-md-2 control-label">税号</label>
+        <div class="input-group   col-md-5"   >
+          <input name="taxNum" id="taxNum" class="form-control" size="16" type="text" value="<%=taxNum%>" readonly>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="dtp_input2" class="col-md-2 control-label">教练</label>
+        <div class="input-group   col-md-5"   >
+          <input name="coach" id="coach" class="form-control" size="16" type="text" value="<%=coach%>" readonly>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="dtp_input2" class="col-md-2 control-label">英文队名</label>
+        <div class="input-group   col-md-5"   >
+          <input name="tNameE" id="tNameE" class="form-control" size="16" type="text" value="<%=tNameE%>" readonly>
+        </div>
+      </div>
+    </div>
+    <hr/>
+    <div class="container">
+      <form id="fmPasswd" action="/alterPassword" method="post" enctype="multipart/form-data" class="form-horizontal"  role="form">
+        <fieldset>
+          <legend>修改密码</legend>
+          <div class="form-group">
+            <label for="dtp_input3" class="col-md-2 control-label">旧密码</label>
+            <div class="input-group   col-md-5"   >
+              <input name="oldpass" id="oldpass" class="form-control" size="16" type="text" value="" >
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="dtp_input3" class="col-md-2 control-label">新密码</label>
+            <div class="input-group   col-md-5"   >
+              <input name="newpass" id="newpass" class="form-control" size="16" type="text" value="" >
+            </div>
+          </div>
+
+          <span>
+    <button id="xiugai" type="submit" >修改</button>
+    </span>
+        </fieldset>
+
+      </form>
+    </div>
+  </div>
+
+</div>
+</div>
+
+
+<div id="footer" class="container" style="padding: 300px;">
+</div>
+<div id="footer" class="container">
+  <nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="navbar-inner navbar-content-center">
+      <p class="text-muted credit" style="padding: 10px; text-align: center">
+        Copyright &copy; 2017. All Rights Reserved <a href="http://acm.xju.edu.cn/" target="_blank">新疆大学软件学院</a>  <a href="mailto:452638569@qq.com">陈彬杰</a>
+
+      </p>
+    </div>
+  </nav>
+</div>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+<script type="text/javascript">
+
+//  $("#yuding").button().click(function () {
+//
+//        $.post("/orderInn",$("#fmOrder").serialize(),function (res) {
+//            alert(res);
+//        })
+//  });
+  $("#shanchu").button().click(function () {
+      $.post("./deleteAllInn",$("#fmOrder").serialize(),function (res) {
+          alert(res);
+      })
+  })
+    $('.form_datetime').datetimepicker({
+        //language:  'fr',
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0,
+        showMeridian: 1
+    });
+    $('.form_date').datetimepicker({
+        language:  'fr',
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0
+    });
+    $('.form_time').datetimepicker({
+        language:  'fr',
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 1,
+        minView: 0,
+        maxView: 1,
+        forceParse: 0
+    });
+</script>
+</body>
+</html>
